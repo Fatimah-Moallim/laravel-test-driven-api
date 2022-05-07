@@ -15,7 +15,7 @@ class TodoListTest extends TestCase
     public function test_fetch_todo_list()
     {
         // Preparation / prepare
-        TodoList::create(['name' => 'my list']);
+        TodoList::factory()->create(['name' => 'my list']);
 
         // Action / perform
         $response = $this->getJson(route('todo-list.store'));
@@ -23,5 +23,6 @@ class TodoListTest extends TestCase
 
         // Assertion / predict
         $this->assertEquals(1, count($response->json()));
+        $this->assertEquals('my list', $response->json()[0]['name']);
     }
 }
